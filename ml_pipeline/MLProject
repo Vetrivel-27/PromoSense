@@ -1,0 +1,28 @@
+name: PromoSense
+
+entry_points:
+  track_all:
+    parameters:
+      artifacts_dir:
+        type: str
+        default: "models/artifacts"
+      tracking_uri:
+        type: str
+        default: ""
+    command: "python -m ml_pipeline.src.models.mlflow_tracker --artifacts-dir {artifacts_dir} --tracking-uri {tracking_uri}"
+
+  run_phase5_benchmark:
+    parameters:
+      n_jobs:
+        type: int
+        default: 2
+      random_state:
+        type: int
+        default: 42
+    command: "python -m ml_pipeline.src.models.experiment_runner"
+
+  run_elasticity:
+    command: "python -m ml_pipeline.src.elasticity.runner"
+
+  run_simulation:
+    command: "python -m ml_pipeline.src.optimization.runner"
